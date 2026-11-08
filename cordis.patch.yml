@@ -1,0 +1,14 @@
+# dsh-irb bundle patch: mount the ethics-checklist tools.
+#
+# Every key below is a Config field (Schemastery schema); invalid values fail the
+# profile load loudly. Keyword checklist only: not an IRB decision.
+- insert:
+    - id: dsh-irb
+      name: dsh-irb
+      config:
+        enabled: true
+        root: .irb
+        # Character cap: over-limit fails, never truncates.
+        maxChars: 1000000
+        # Store the checked application as REP evidence + record.
+        persist: true
