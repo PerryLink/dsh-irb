@@ -56,6 +56,9 @@ export function makeIrbRiskTool(runtime: IrbRuntime) {
       },
     },
     async execute(args: unknown) {
+      if (args !== undefined && (typeof args !== 'object' || args === null || Array.isArray(args))) {
+        return { ok: false as const, error: { code: 'INVALID_INPUT', message: 'pass risk flags as an object' } }
+      }
       return { ok: true as const, risk: runtime.risk((args ?? {}) as Parameters<IrbRuntime['risk']>[0]) as never }
     },
   })

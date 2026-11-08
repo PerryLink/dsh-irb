@@ -7,7 +7,7 @@ import { defineTool } from '@deepseek-ai/dsh-tools'
 import type { IrbRuntime } from '../runtime.ts'
 import type { IrbAnalysis } from '../analyze.ts'
 import type { RiskResult } from '../checklist.ts'
-import { ERROR_SCHEMA } from './shared.ts'
+import { ERROR_SCHEMA, analysisProblem, asAnalysis, asRisk, riskProblem } from './shared.ts'
 
 const OUTPUT_SCHEMA = {
   type: 'object',
@@ -47,11 +47,28 @@ export function makeIrbExportTool(runtime: IrbRuntime) {
       },
     },
     async execute(args: unknown) {
-      const request = args as { analysis?: IrbAnalysis; risk?: RiskResult; title?: string }
-      if (request.analysis === undefined || !Array.isArray(request.analysis.findings)) {
+      if (typeof args !== 'object' || args === null) {
         return { ok: false as const, error: { code: 'INVALID_INPUT', message: 'pass the analysis object from irb_check' } }
       }
-      const result = runtime.export(request.analysis, request.risk, request.title)
+      const request = args as { analysis?: IrbAnalysis; risk?: RiskResult; title?: string }
+      const problem = analysisProblem(request.analysis)
+      if (problem !== undefined) {
+        return { ok: false as const, error: { code: 'INVALID_INPUT', message: `pass the analysis object from irb_check (${problem})` } }
+      }
+      if (request.risk !== undefined) {
+        const riskIssue = riskProblem(request.risk)
+        if (riskIssue !== undefined) {
+          return { ok: false as const, error: { code: 'INVALID_INPUT', message: `pass the risk object from irb_risk (${riskIssue})` } }
+        }
+      }
+      if (request.title !== undefined && typeof request.title !== 'string') {
+        return { ok: false as const, error: { code: 'INVALID_INPUT', message: 'title must be a string' } }
+      }
+      const result = runtime.export(
+        asAnalysis(request.analysis),
+        request.risk === undefined ? undefined : asRisk(request.risk),
+        request.title,
+      )
       return { ok: true as const, markdown: result.markdown, sarif: result.sarif as never }
     },
   })

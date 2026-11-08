@@ -6,6 +6,19 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Fixed
+
+- The "Assent for minors" item no longer matches generic informed-consent text,
+  and the animal-ethics item no longer matches a bare "ethics committee"
+  mention; both inflated coverage without evidence of the actual statement.
+- Missing optional checklist items are recorded as `skipped`/`not_applicable`
+  in REP evidence instead of `pass`.
+- `irb_export` validates the supplied analysis/risk objects and returns
+  `INVALID_INPUT` instead of throwing in the renderer.
+- Package author corrected to the irb contributors.
+- Regression tests for the keyword and malformed-analysis paths (13 total).
+
+
 ## [0.1.0] - 2026-11-08
 
 First release: ethics-application checklist.

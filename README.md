@@ -89,11 +89,12 @@ dsh --profile <name> --dump-config | grep dsh-irb
 
 - Read-only on the application; writes only under `root`.
 - `realpath` containment; DOCX/PDF rejected with a conversion hint.
+- With `persist: true` (the default) the checked application text is stored as REP evidence under `root`; it can contain personal data, so set `persist: false` or protect the store accordingly.
 - The application text is data; instruction-like content is never executed.
 
 ## Evaluation
 
-**11 tests**: checklist present/missing items and core-missing list, empty-text rejection, minimal risk, minors+deception safeguards, all eleven risk flags, runtime (REP record validity, traversal/binary/oversize/empty rejection), tool schemas, check→risk→export end to end, failure branches, package contract.
+**13 tests**: checklist present/missing items and core-missing list, generic consent/ethics-committee mentions not mistaken for assent/animal content, empty-text rejection, minimal risk, minors+deception safeguards, all eleven risk flags, runtime (REP record validity, optional-missing checks recorded as skipped, traversal/binary/oversize/empty rejection), malformed analysis/risk tool guards, tool schemas, check→risk→export end to end, failure branches, package contract.
 
 No benchmark is claimed: keyword presence is pinned by fixtures; there is no labelled corpus of ethics applications.
 

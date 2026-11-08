@@ -147,7 +147,8 @@ export class IrbRuntime {
     const checks: CheckResult[] = analysis.findings.map(finding => ({
       checkId: `chk-irb-${finding.id}`,
       check: 'other' as const,
-      status: finding.status === 'present' ? ('pass' as const) : finding.severity === 'warning' ? ('warn' as const) : ('pass' as const),
+      status: finding.status === 'present' ? ('pass' as const) : finding.severity === 'warning' ? ('warn' as const) : ('skipped' as const),
+      ...(finding.status === 'present' || finding.severity === 'warning' ? {} : { code: 'not_applicable' as const }),
       severity: finding.severity === 'warning' ? ('warning' as const) : ('info' as const),
       detail: finding.status === 'present' ? `${finding.label} present` : `${finding.label} missing — ${finding.advice ?? ''}`,
       ...(finding.locator === undefined ? {} : { actual: { charStart: finding.locator.charStart, charEnd: finding.locator.charEnd } }),

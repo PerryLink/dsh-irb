@@ -26,7 +26,7 @@ export const IRB_ITEMS: readonly IrbItem[] = [
   { id: 'participants', label: 'Participants and eligibility', patterns: [/受试者|研究对象|纳入标准|排除标准|eligib|participants/iu], advice: 'give eligibility criteria and the target sample size', core: true },
   { id: 'recruitment', label: 'Recruitment', patterns: [/招募|recruit/iu], advice: 'describe how participants are approached', core: true },
   { id: 'consent', label: 'Informed consent process', patterns: [/知情同意|informed consent|consent form|同意书/iu], advice: 'describe who obtains consent, when, and how capacity is assessed', core: true },
-  { id: 'assent', label: 'Assent for minors', patterns: [/知情同意|assent|未成年人|未成年/iu], advice: 'for minors, include an age-appropriate assent process', core: false },
+  { id: 'assent', label: 'Assent for minors', patterns: [/\bassent\b|(?:儿童|未成年).{0,40}(?:同意|赞同)/iu], advice: 'for minors, include an age-appropriate assent process', core: false },
   { id: 'risks', label: 'Risks and mitigation', patterns: [/风险|risk|不良事件|adverse/iu], advice: 'list physical, psychological, social and economic risks and how they are minimised', core: true },
   { id: 'benefits', label: 'Benefits', patterns: [/受益|benefit/iu], advice: 'state direct and societal benefits without overclaiming', core: false },
   { id: 'confidentiality', label: 'Confidentiality and data protection', patterns: [/保密|confidential|数据保护|data protection|个人信息/iu], advice: 'describe de-identification, storage, access control and transfer', core: true },
@@ -35,7 +35,7 @@ export const IRB_ITEMS: readonly IrbItem[] = [
   { id: 'conflicts', label: 'Conflicts of interest', patterns: [/利益冲突|conflict of interest/iu], advice: 'declare conflicts and how they are managed', core: false },
   { id: 'retention', label: 'Data and sample retention', patterns: [/保存|留存|retention|销毁|destroy/iu], advice: 'state retention periods, storage and destruction', core: true },
   { id: 'dissemination', label: 'Dissemination', patterns: [/发表|发布|dissemin|publication/iu], advice: 'describe how results will be reported (including negative results)', core: false },
-  { id: 'animal', label: 'Animal ethics (3Rs, IACUC)', patterns: [/动物|animal|3R|IACUC|伦理委员会/iu], advice: 'for animal work: justify species/numbers, describe the 3Rs and IACUC approval', core: false },
+  { id: 'animal', label: 'Animal ethics (3Rs, IACUC)', patterns: [/动物|animal|3R|IACUC/iu], advice: 'for animal work: justify species/numbers, describe the 3Rs and IACUC approval', core: false },
   { id: 'biosafety', label: 'Biosafety / human samples', patterns: [/生物安全|biosafety|人体样本|生物样本|blood sample|tissue/iu], advice: 'describe biosafety approvals and human-sample handling', core: false },
 ]
 

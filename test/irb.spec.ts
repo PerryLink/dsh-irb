@@ -32,6 +32,13 @@ describe('checklist', () => {
     expect(analysis.coreMissing).not.toContain('consent')
   })
 
+  it('does not treat generic consent or an ethics committee mention as assent/animal content', () => {
+    const analysis = analyzeIrb('知情同意：书面同意。伦理委员会：已批准。\n')
+    expect(analysis.findings.find(finding => finding.id === 'consent')?.status).toBe('present')
+    expect(analysis.findings.find(finding => finding.id === 'assent')?.status).toBe('missing')
+    expect(analysis.findings.find(finding => finding.id === 'animal')?.status).toBe('missing')
+  })
+
   it('rejects empty text', () => {
     expect(() => analyzeIrb('   ')).toThrow(RangeError)
   })

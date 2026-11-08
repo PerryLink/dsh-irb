@@ -48,6 +48,9 @@ export function makeIrbCheckTool(runtime: IrbRuntime) {
       },
     },
     async execute(args: unknown) {
+      if (typeof args !== 'object' || args === null) {
+        return { ok: false as const, error: { code: 'INVALID_INPUT', message: 'pass text or path' } }
+      }
       const request = args as { text?: string; path?: string; persist?: boolean }
       try {
         const result = await runtime.check({

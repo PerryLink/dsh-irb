@@ -8,6 +8,7 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { validateRep } from '@perrylink/dsh-research-core'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { analyzeIrb } from '../src/analyze.ts'
 import { resolveConfig } from '../src/config.ts'
 import { IrbRuntime } from '../src/runtime.ts'
 import { makeIrbCheckTool } from '../src/tools/irb-check.ts'
@@ -44,12 +45,18 @@ describe('runtime', () => {
     const result = await runtime().check({ path: 'application.md' })
     expect(result.analysis.findings.find(finding => finding.id === 'consent')?.status).toBe('present')
     expect(result.evidenceId).toMatch(/^ev-/u)
-    const record = JSON.parse(await readFile(result.recordPath!, 'utf8')) as unknown
+    const record = JSON.parse(await readFile(result.recordPath!, 'utf8')) as {
+      evidence: Array<{ checks: Array<{ detail: string; status: string; code?: string }> }>
+    }
     expect(validateRep(record).ok).toBe(true)
+    const optionalMissing = record.evidence[0]!.checks.find(check => check.detail.startsWith('Assent for minors'))
+    expect(optionalMissing?.status).toBe('skipped')
+    expect(optionalMissing?.code).toBe('not_applicable')
   })
 
   it('rejects traversal, binary files, oversized text and empty input', async () => {
     await expect(runtime().check({ path: '../escape.md' })).rejects.toMatchObject({ code: 'PATH_ESCAPE' })
+    await expect(runtime().check({ path: path.resolve(workspace, '..', 'outside.md') })).rejects.toMatchObject({ code: 'PATH_ESCAPE' })
     await writeFile(path.join(workspace, 'application.pdf'), 'pdf', 'utf8')
     await expect(runtime().check({ path: 'application.pdf' })).rejects.toMatchObject({ code: 'UNSUPPORTED_FILE' })
     const tiny = new IrbRuntime({ config: resolveConfig({ workspaceRoot: workspace, root: store, maxChars: 10 }), now: () => AT })
@@ -91,6 +98,18 @@ describe('tools', () => {
     expect(value.error.code).toBe('INVALID_INPUT')
     const noExport = (await makeIrbExportTool(runtime()).execute({ analysis: {} }, EXEC)) as { ok: false; error: { code: string } }
     expect(noExport.error.code).toBe('INVALID_INPUT')
+  })
+
+  it('rejects malformed analysis/risk objects instead of throwing in the renderer', async () => {
+    const exportTool = makeIrbExportTool(runtime())
+    const badAnalysis = (await exportTool.execute({ analysis: { findings: [null] } }, EXEC)) as { ok: false; error: { code: string } }
+    expect(badAnalysis.error.code).toBe('INVALID_INPUT')
+    const analysis = analyzeIrb(TEXT)
+    const badRisk = (await exportTool.execute({ analysis, risk: { level: 'minimal' } }, EXEC)) as { ok: false; error: { code: string } }
+    expect(badRisk.error.code).toBe('INVALID_INPUT')
+    const goodRisk = { level: 'minimal' as const, factors: [], safeguards: [], advisory: 'advisory' }
+    const good = (await exportTool.execute({ analysis, risk: goodRisk }, EXEC)) as { ok: true }
+    expect(good.ok).toBe(true)
   })
 })
 
