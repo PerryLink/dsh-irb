@@ -1,8 +1,8 @@
 {
   "name": "dsh-irb",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Ethics-application checklist for DeepSeek Harness: 18-item keyword checklist (title, PI, purpose, design, participants, recruitment, consent, assent, risks, benefits, confidentiality, vulnerable groups, compensation, conflicts, retention, dissemination, animal ethics, biosafety), an advisory risk level with required safeguards from structured flags, Markdown/SARIF export and REP evidence. Not an IRB decision and not legal advice.",
-  "author": "dsh-irb contributors",
+  "author": "PerryLink contributors",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PerryLink/dsh-irb.git"
@@ -29,7 +29,9 @@
     "CHANGELOG.md",
     "README.md",
     "README-zh.md",
-    "LICENSE"
+    "LICENSE",
+    "SECURITY.md",
+    "THIRD_PARTY_NOTICES.md"
   ],
   "sideEffects": false,
   "dsh": {
