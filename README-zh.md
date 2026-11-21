@@ -1,13 +1,22 @@
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-irb-hero-zh-dark.webp">
+  <img src="docs/assets/dsh-irb-hero-zh-light.webp" width="100%" alt="dsh-irb 配图：一份伦理申请被逐项核对——知情同意已具备，未成年人赞同与动物伦理为可选缺失并记为 skipped；右侧是 14/18 的清单结果与建议性风险等级">
+</picture>
+
 # dsh-irb
 
 **赶在伦理委员会之前把申请材料准备好——并知道哪些核心陈述还缺着。**
 
 *面向伦理申请的 18 项关键词清单、一个建议性风险等级及其对应的保障措施，以及可随材料提交的 Markdown + SARIF 导出。*
 
+[English](README.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E%3D24.9-brightgreen.svg)]()
 
-[English](README.md) · 简体中文
+</div>
 
 ---
 
@@ -16,6 +25,14 @@
 - **`irb_check`** — 18 项：标题、PI/联系人、目的、设计、参与者/入选条件、招募、知情同意、未成年人赞同、风险、获益、保密/数据保护、弱势群体、补偿、利益冲突、保存、传播、动物伦理（3Rs）、生物安全/人体样本。已具备的项会给出字符位置；缺失的核心项会给出建议。
 - **`irb_risk`** — 结构化标记（弱势群体、未成年人、囚犯、妊娠、认知障碍、欺骗、敏感话题、侵入性操作、生物样本、遗传数据、人体挑战、基因治疗、自动化决策）→ 建议等级，以及每个因素所需的保障措施。
 - **`irb_export`** — Markdown（条目表、风险表、保障措施）+ SARIF 2.1.0；检查申请时还会写入 REP 证据。
+
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-irb-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-irb-flow-v5-light.svg" width="100%" alt="dsh-irb 结构图：申请文本或工作区内路径经包含性校验读入，按 18 项关键词逐项检查，记入带 pass、warn、skipped 的 REP checks[]，再结合建议性风险等级，导出 Markdown 与 SARIF 2.1.0">
+</picture>
+
+*结构：读取 → 检查 → 导出；`checks[]` 与建议性的 `risk` 是两条输出，可选缺失项记为 `skipped` 并带 `code: not_applicable`，绝不算作 pass。图内只有工具名、条目名与字段名，五语共用同一张结构图。*
 
 ## 它不做什么
 
@@ -93,6 +110,11 @@ dsh --profile <name> --dump-config | grep dsh-irb
 - 申请文本视为数据；指令性内容永远不会被执行。
 
 ## 评测
+
+![dsh-irb 测试套件：3 个测试文件的真实运行——6 项清单测试、7 项运行时与工具测试、挂载契约全部通过](docs/assets/dsh-irb-demo.gif)
+
+*动图是 2026-11-21 真实 `pnpm test` 的输出（3 个测试文件）。该插件没有 CLI，因此用它自己的测试套件作为一次真实运行——清单、建议性风险、REP 记录与导出。*
+
 
 **13 个测试**：清单的已具备/缺失项与核心缺失列表、泛泛的同意/伦理委员会提及不会被误认为赞同/动物内容、空文本拒绝、最小风险、未成年人 + 欺骗的保障措施、全部十三个风险标记、运行时（REP 记录有效性、可选缺失项记为 skipped、路径穿越/二进制/超大/空内容拒绝）、畸形 analysis/risk 的工具防护、工具 schema、check→risk→export 端到端、失败分支、包契约。
 

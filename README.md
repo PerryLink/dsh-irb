@@ -1,13 +1,22 @@
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-irb-hero-en-dark.webp">
+  <img src="docs/assets/dsh-irb-hero-en-light.webp" width="100%" alt="dsh-irb: an ethics application checked item by item — consent present, assent for minors and animal ethics missing as optional and recorded as skipped — with the 14/18 analysis and the advisory risk level on the right">
+</picture>
+
 # dsh-irb
 
 **Assemble the ethics application before the committee does — and know which core statements are still missing.**
 
 *An 18-item keyword checklist for ethics applications, an advisory risk level with the safeguards it implies, and a Markdown + SARIF export you can attach to the submission.*
 
+[简体中文](README-zh.md) · [Español](README-es.md) · [Português](README-pt.md) · [हिन्दी](README-hi.md)
+
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/node-%5E22.19%20%7C%7C%20%3E%3D24.9-brightgreen.svg)]()
 
-English · [简体中文](README-zh.md)
+</div>
 
 ---
 
@@ -16,6 +25,14 @@ English · [简体中文](README-zh.md)
 - **`irb_check`** — 18 items: title, PI/contact, purpose, design, participants/eligibility, recruitment, informed consent, assent for minors, risks, benefits, confidentiality/data protection, vulnerable groups, compensation, conflicts, retention, dissemination, animal ethics (3Rs), biosafety/human samples. Present items get character locators; missing core items get advice.
 - **`irb_risk`** — structured flags (vulnerable groups, minors, prisoners, pregnancy, cognitive impairment, deception, sensitive topics, invasive procedures, biological samples, genetic data, human challenge, gene therapy, automated decisions) → advisory level plus the safeguards each factor requires.
 - **`irb_export`** — Markdown (item table, risk table, safeguards) + SARIF 2.1.0, plus REP evidence when the application is checked.
+
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-irb-flow-v5-dark.svg">
+  <img src="docs/assets/dsh-irb-flow-v5-light.svg" width="100%" alt="dsh-irb structure: application text or a workspace path is read with containment checks, checked against 18 keyword items, recorded as REP checks[] with pass, warn and skipped, combined with the advisory risk level, then exported to Markdown and SARIF 2.1.0">
+</picture>
+
+*Structure: read → check → export; `checks[]` and the advisory `risk` are the two outputs, and a missing optional item is `skipped` with `code: not_applicable`, never a pass. The token labels inside the diagram are the real tool, item and field names, so the same picture serves all five languages.*
 
 ## What it does not do
 
@@ -93,6 +110,11 @@ dsh --profile <name> --dump-config | grep dsh-irb
 - The application text is data; instruction-like content is never executed.
 
 ## Evaluation
+
+![dsh-irb test suite: a real run of the 3 test files — 6 checklist tests, 7 runtime and tool tests and the mount contract all pass](docs/assets/dsh-irb-demo.gif)
+
+*Animated: the real `pnpm test` output on 2026-11-21 (3 test files). The plugin has no CLI, so its own suite is the run — checklist, advisory risk, REP record and export.*
+
 
 **13 tests**: checklist present/missing items and core-missing list, generic consent/ethics-committee mentions not mistaken for assent/animal content, empty-text rejection, minimal risk, minors+deception safeguards, all thirteen risk flags, runtime (REP record validity, optional-missing checks recorded as skipped, traversal/binary/oversize/empty rejection), malformed analysis/risk tool guards, tool schemas, check→risk→export end to end, failure branches, package contract.
 
