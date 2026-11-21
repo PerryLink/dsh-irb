@@ -116,7 +116,7 @@ dsh --profile <name> --dump-config | grep dsh-irb
 *Animado: a saída real de `pnpm test` em 2026-11-21 (3 arquivos de teste). O plugin não tem CLI, então seu próprio conjunto de testes é a execução — lista de verificação, risco orientativo, registro REP e exportação.*
 
 
-**13 testes**: itens presentes/ausentes da lista de verificação e lista de essenciais ausentes, menções genéricas de consentimento ou comitê de ética que não são confundidas com assentimento ou conteúdo animal, rejeição de texto vazio, risco mínimo, salvaguardas de menores + engano, os treze sinalizadores de risco, execução (validade do registro REP, verificações opcionais ausentes registradas como skipped, rejeição de travessia/binário/excesso de tamanho/vazio), proteções das ferramentas contra análise/risco malformados, esquemas das ferramentas, de verificação a risco e a exportação de ponta a ponta, ramos de falha e contrato do pacote.
+**14 testes**: itens presentes/ausentes da lista de verificação e lista de essenciais ausentes, menções genéricas de consentimento ou comitê de ética que não são confundidas com assentimento ou conteúdo animal, rejeição de texto vazio, risco mínimo, salvaguardas de menores + engano, os treze sinalizadores de risco, execução (validade do registro REP, verificações opcionais ausentes registradas como skipped, rejeição de travessia/binário/excesso de tamanho/vazio), proteções das ferramentas contra análise/risco malformados, esquemas das ferramentas, de verificação a risco e a exportação de ponta a ponta, ramos de falha e contrato do pacote.
 
 Nenhum benchmark é declarado: a presença de palavras-chave é fixada por fixtures; não existe um corpus rotulado de solicitações de ética.
 

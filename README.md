@@ -116,7 +116,7 @@ dsh --profile <name> --dump-config | grep dsh-irb
 *Animated: the real `pnpm test` output on 2026-11-21 (3 test files). The plugin has no CLI, so its own suite is the run — checklist, advisory risk, REP record and export.*
 
 
-**13 tests**: checklist present/missing items and core-missing list, generic consent/ethics-committee mentions not mistaken for assent/animal content, empty-text rejection, minimal risk, minors+deception safeguards, all thirteen risk flags, runtime (REP record validity, optional-missing checks recorded as skipped, traversal/binary/oversize/empty rejection), malformed analysis/risk tool guards, tool schemas, check→risk→export end to end, failure branches, package contract.
+**14 tests**: checklist present/missing items and core-missing list, generic consent/ethics-committee mentions not mistaken for assent/animal content, empty-text rejection, minimal risk, minors+deception safeguards, all thirteen risk flags, runtime (REP record validity, optional-missing checks recorded as skipped, traversal/binary/oversize/empty rejection), malformed analysis/risk tool guards, tool schemas, check→risk→export end to end, failure branches, package contract.
 
 No benchmark is claimed: keyword presence is pinned by fixtures; there is no labelled corpus of ethics applications.
 
