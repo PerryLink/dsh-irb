@@ -7,6 +7,8 @@
 
 # dsh-irb
 
+当前版本 `0.1.4`。
+
 **Assemble the ethics application before the committee does — and know which core statements are still missing.**
 
 *An 18-item keyword checklist for ethics applications, an advisory risk level with the safeguards it implies, and a Markdown + SARIF export you can attach to the submission.*
