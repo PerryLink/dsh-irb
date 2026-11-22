@@ -26,7 +26,6 @@
 - **`irb_risk`** — sinalizadores estruturados (grupos vulneráveis, menores, prisioneiros, gravidez, comprometimento cognitivo, engano, temas sensíveis, procedimentos invasivos, amostras biológicas, dados genéticos, provocação em humanos, terapia gênica, decisões automatizadas) → nível orientativo mais as salvaguardas que cada fator exige.
 - **`irb_export`** — Markdown (tabela de itens, tabela de risco, salvaguardas) + SARIF 2.1.0, além de evidência REP quando a solicitação é verificada.
 
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-irb-flow-v5-dark.svg">
   <img src="docs/assets/dsh-irb-flow-v5-light.svg" width="100%" alt="dsh-irb estrutura: o texto da solicitação ou um caminho do espaço de trabalho é lido com verificações de contenção, confrontado com 18 itens de palavras-chave, registrado como checks[] de REP com pass, warn e skipped, combinado com o nível de risco orientativo e exportado para Markdown e SARIF 2.1.0">
@@ -82,7 +81,7 @@
 
 | | |
 |---|---|
-| DeepSeek Harness | **`dsh-v0.2.2-rc.4`** (verificado em 2026-11-18); peer `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0` |
+| DeepSeek Harness | **`dsh-v0.2.3-alpha.1`** (verificado em 2026-11-22); peer `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0` |
 | Node | `^22.19.0 \|\| >=24.9.0` (testado em `24.22.1`), apenas ESM |
 | Pares | `@perrylink/dsh-research-core ^0.1.0`, `@deepseek-ai/cordis ^4.0.5-alpha.1`, `@deepseek-ai/dsh-tools`, `@deepseek-ai/schemastery ^3.18.5-alpha.1` |
 | Dependências de execução | **zero** |
@@ -114,7 +113,6 @@ dsh --profile <name> --dump-config | grep dsh-irb
 ![conjunto de testes do dsh-irb: uma execução real dos 3 arquivos de teste — 6 testes da lista de verificação, 7 testes de execução e ferramentas e o contrato de montagem passam](docs/assets/dsh-irb-demo.gif)
 
 *Animado: a saída real de `pnpm test` em 2026-11-21 (3 arquivos de teste). O plugin não tem CLI, então seu próprio conjunto de testes é a execução — lista de verificação, risco orientativo, registro REP e exportação.*
-
 
 **14 testes**: itens presentes/ausentes da lista de verificação e lista de essenciais ausentes, menções genéricas de consentimento ou comitê de ética que não são confundidas com assentimento ou conteúdo animal, rejeição de texto vazio, risco mínimo, salvaguardas de menores + engano, os treze sinalizadores de risco, execução (validade do registro REP, verificações opcionais ausentes registradas como skipped, rejeição de travessia/binário/excesso de tamanho/vazio), proteções das ferramentas contra análise/risco malformados, esquemas das ferramentas, de verificação a risco e a exportação de ponta a ponta, ramos de falha e contrato do pacote.
 

@@ -26,7 +26,6 @@
 - **`irb_risk`** — marcas estructuradas (grupos vulnerables, menores, prisioneros, embarazo, deterioro cognitivo, engaño, temas sensibles, procedimientos invasivos, muestras biológicas, datos genéticos, provocación en humanos, terapia génica, decisiones automatizadas) → nivel orientativo más las salvaguardas que exige cada factor.
 - **`irb_export`** — Markdown (tabla de ítems, tabla de riesgo, salvaguardas) + SARIF 2.1.0, además de evidencia REP cuando se comprueba la solicitud.
 
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-irb-flow-v5-dark.svg">
   <img src="docs/assets/dsh-irb-flow-v5-light.svg" width="100%" alt="dsh-irb estructura: el texto de la solicitud o una ruta del espacio de trabajo se lee con comprobaciones de contención, se contrasta con 18 ítems de palabras clave, se registra como checks[] de REP con pass, warn y skipped, se combina con el nivel de riesgo orientativo y se exporta a Markdown y SARIF 2.1.0">
@@ -82,7 +81,7 @@
 
 | | |
 |---|---|
-| DeepSeek Harness | **`dsh-v0.2.2-rc.4`** (verificado 2026-11-18); peer `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0` |
+| DeepSeek Harness | **`dsh-v0.2.3-alpha.1`** (verificado 2026-11-22); peer `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0` |
 | Node | `^22.19.0 \|\| >=24.9.0` (probado en `24.22.1`), solo ESM |
 | Pares | `@perrylink/dsh-research-core ^0.1.0`, `@deepseek-ai/cordis ^4.0.5-alpha.1`, `@deepseek-ai/dsh-tools`, `@deepseek-ai/schemastery ^3.18.5-alpha.1` |
 | Dependencias en tiempo de ejecución | **cero** |
@@ -114,7 +113,6 @@ dsh --profile <name> --dump-config | grep dsh-irb
 ![conjunto de pruebas de dsh-irb: una ejecución real de los 3 archivos de prueba — 6 pruebas de la lista de comprobación, 7 pruebas de tiempo de ejecución y herramientas y el contrato de montaje pasan](docs/assets/dsh-irb-demo.gif)
 
 *Animado: la salida real de `pnpm test` el 2026-11-21 (3 archivos de prueba). El plugin no tiene CLI, así que su propio conjunto de pruebas es la ejecución — lista de comprobación, riesgo orientativo, registro REP y exportación.*
-
 
 **14 pruebas**: ítems presentes/ausentes de la lista de comprobación y lista de esenciales ausentes, menciones genéricas de consentimiento o comité de ética que no se confunden con asentimiento o contenido animal, rechazo de texto vacío, riesgo mínimo, salvaguardas de menores + engaño, las trece marcas de riesgo, tiempo de ejecución (validez del registro REP, comprobaciones opcionales ausentes registradas como skipped, rechazo de traversals/binarios/exceso de tamaño/vacío), protecciones de las herramientas ante análisis/riesgo malformados, esquemas de las herramientas, de comprobación a riesgo y a exportación de extremo a extremo, ramas de fallo y contrato del paquete.
 

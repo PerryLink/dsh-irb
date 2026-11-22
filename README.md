@@ -26,7 +26,6 @@
 - **`irb_risk`** — structured flags (vulnerable groups, minors, prisoners, pregnancy, cognitive impairment, deception, sensitive topics, invasive procedures, biological samples, genetic data, human challenge, gene therapy, automated decisions) → advisory level plus the safeguards each factor requires.
 - **`irb_export`** — Markdown (item table, risk table, safeguards) + SARIF 2.1.0, plus REP evidence when the application is checked.
 
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-irb-flow-v5-dark.svg">
   <img src="docs/assets/dsh-irb-flow-v5-light.svg" width="100%" alt="dsh-irb structure: application text or a workspace path is read with containment checks, checked against 18 keyword items, recorded as REP checks[] with pass, warn and skipped, combined with the advisory risk level, then exported to Markdown and SARIF 2.1.0">
@@ -82,7 +81,7 @@
 
 | | |
 |---|---|
-| DeepSeek Harness | **`dsh-v0.2.2-rc.4`** (verified 2026-11-18); peer `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0` |
+| DeepSeek Harness | **`dsh-v0.2.3-alpha.1`** (verified 2026-11-22); peer `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0` |
 | Node | `^22.19.0 \|\| >=24.9.0` (tested `24.22.1`), ESM only |
 | Peers | `@perrylink/dsh-research-core ^0.1.0`, `@deepseek-ai/cordis ^4.0.5-alpha.1`, `@deepseek-ai/dsh-tools`, `@deepseek-ai/schemastery ^3.18.5-alpha.1` |
 | Runtime dependencies | **zero** |
@@ -114,7 +113,6 @@ dsh --profile <name> --dump-config | grep dsh-irb
 ![dsh-irb test suite: a real run of the 3 test files — 6 checklist tests, 7 runtime and tool tests and the mount contract all pass](docs/assets/dsh-irb-demo.gif)
 
 *Animated: the real `pnpm test` output on 2026-11-21 (3 test files). The plugin has no CLI, so its own suite is the run — checklist, advisory risk, REP record and export.*
-
 
 **14 tests**: checklist present/missing items and core-missing list, generic consent/ethics-committee mentions not mistaken for assent/animal content, empty-text rejection, minimal risk, minors+deception safeguards, all thirteen risk flags, runtime (REP record validity, optional-missing checks recorded as skipped, traversal/binary/oversize/empty rejection), malformed analysis/risk tool guards, tool schemas, check→risk→export end to end, failure branches, package contract.
 

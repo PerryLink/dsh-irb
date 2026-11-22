@@ -26,7 +26,6 @@
 - **`irb_risk`** — 结构化标记（弱势群体、未成年人、囚犯、妊娠、认知障碍、欺骗、敏感话题、侵入性操作、生物样本、遗传数据、人体挑战、基因治疗、自动化决策）→ 建议等级，以及每个因素所需的保障措施。
 - **`irb_export`** — Markdown（条目表、风险表、保障措施）+ SARIF 2.1.0；检查申请时还会写入 REP 证据。
 
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/dsh-irb-flow-v5-dark.svg">
   <img src="docs/assets/dsh-irb-flow-v5-light.svg" width="100%" alt="dsh-irb 结构图：申请文本或工作区内路径经包含性校验读入，按 18 项关键词逐项检查，记入带 pass、warn、skipped 的 REP checks[]，再结合建议性风险等级，导出 Markdown 与 SARIF 2.1.0">
@@ -82,7 +81,7 @@
 
 | | |
 |---|---|
-| DeepSeek Harness | **`dsh-v0.2.2-rc.4`**（2026-11-18 实测）；peer `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0` |
+| DeepSeek Harness | **`dsh-v0.2.3-alpha.1`**（2026-11-22 实测）；peer `>=0.2.1-0 <0.3.0 \|\| >=0.2.2-0 <0.3.0` |
 | Node | `^22.19.0 \|\| >=24.9.0`（实测 `24.22.1`），仅 ESM |
 | Peer 依赖 | `@perrylink/dsh-research-core ^0.1.0`、`@deepseek-ai/cordis ^4.0.5-alpha.1`、`@deepseek-ai/dsh-tools`、`@deepseek-ai/schemastery ^3.18.5-alpha.1` |
 | 运行时依赖 | **零** |
@@ -114,7 +113,6 @@ dsh --profile <name> --dump-config | grep dsh-irb
 ![dsh-irb 测试套件：3 个测试文件的真实运行——6 项清单测试、7 项运行时与工具测试、挂载契约全部通过](docs/assets/dsh-irb-demo.gif)
 
 *动图是 2026-11-21 真实 `pnpm test` 的输出（3 个测试文件）。该插件没有 CLI，因此用它自己的测试套件作为一次真实运行——清单、建议性风险、REP 记录与导出。*
-
 
 **14 个测试**：清单的已具备/缺失项与核心缺失列表、泛泛的同意/伦理委员会提及不会被误认为赞同/动物内容、空文本拒绝、最小风险、未成年人 + 欺骗的保障措施、全部十三个风险标记、运行时（REP 记录有效性、可选缺失项记为 skipped、路径穿越/二进制/超大/空内容拒绝）、畸形 analysis/risk 的工具防护、工具 schema、check→risk→export 端到端、失败分支、包契约。
 
